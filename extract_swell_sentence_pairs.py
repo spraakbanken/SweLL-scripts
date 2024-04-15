@@ -1,3 +1,5 @@
+### This code can be used to extract pairs of sentences from the SweLL-gold corpus sources (originals) and targets (correction hypotheses) where the two have the same length.
+
 import xml.etree.ElementTree as ET
 import pandas as pd
 import os
@@ -5,6 +7,7 @@ import argparse
 
 #######################################################################
 
+### This is used to replace "pseudonyms" like A-stad or B-land with something more readable (but not necessarily logically coherent).
 placeholder_map = {  # baseline "pseudonymization"
     'kurs': 'kurs',
     'kursen': 'kursen',
