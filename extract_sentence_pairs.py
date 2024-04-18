@@ -113,6 +113,17 @@ def pair_up(source_dict: dict, target_dict: dict):
     return paired_up
 
 def tokenlist(word_label_pairs, metadata):
+    '''
+    Build a conllu.TokenList out of the sentence-level information extracted 
+    from SweLL.
+
+    Args:
+        word_label_pairs (list): a list of word-correction label pairs.
+        metadata (dict): metadata of the essay the sentence belongs to, directly in SweLL format.
+
+    Returns:
+        a conllu.TokenList representing the sentence.
+    '''
     tokens = []
     for i, (word,label) in enumerate(word_label_pairs):
         tokens.append(conllu.Token(
