@@ -44,3 +44,15 @@ python extract_sentence_pairs.py PATH/TO/sourceSweLL.xml PATH/TO/targetSweLL.xml
 ```
 
 Note that when `--format=conllu`, the program will write two files, named `org-OUTFILE` and `trg-OUTFILE`.
+
+## [`multigec.py`](multigec.py)
+Script for converting the SweLL-gold corpus into [the Markdown-based format required for the 2025 MultiGEC shared task](https://github.com/spraakbanken/multigec-2025?tab=readme-ov-file#data-format).
+For plain-text text extraction and pseudonymization, it relies on functions defined in [`extract_sentence_pairs`](extract_sentence_pairs.py).
+Essays are randomly divided into a train, dev and test set.
+
+### Usage
+```
+python multigec.py PATH/TO/sourceSweLL.xml PATH/TO/targetSweLL.xml
+```
+
+The output is a set of text files following the shared task's naming conventions, which are created in the working directory.   

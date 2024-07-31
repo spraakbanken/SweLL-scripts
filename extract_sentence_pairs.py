@@ -51,11 +51,12 @@ def get_essays(file: str):
 
     return essays
 
-def get_sent_dict(essays: list):
+def get_sent_dict(essays: list, replace_nls: bool=False):
     '''A function that retrieves sentences for every essay.
     
     Args:
         essays (list): A list of essays retrieved from the XML file.
+        replace_nls (bool): A flag specifying whether ␤ characters are to be replaced with \n. If set to False, ␤s do NOT appear in the final output
         
     Returns:
         A list of essays.
@@ -67,6 +68,8 @@ def get_sent_dict(essays: list):
         essay_id = metadata['essay_id']
         sent = []
         for (cat,word,info) in essay[1:]:  # without metadata
+            if replace_nls: 
+                word = word.replace("␤", "\n")
             if cat == 'link':
                 continue
             elif cat == 'sentence':
