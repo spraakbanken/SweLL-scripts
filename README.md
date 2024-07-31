@@ -1,7 +1,7 @@
 # SweLL-scripts
 A collection of scripts for working with the Swedish Learner Language corpora, [SweLL-gold](https://spraakbanken.gu.se/resurser/swell-gold) and [SweLL-pilot](https://spraakbanken.gu.se/resurser/swell-pilot).
 
-## [dataloaders.py](dataloaders.py)
+## [`dataloaders.py`](dataloaders.py)
 
 SweLL-pilot has individual files for each essay with the following format:
 
@@ -26,7 +26,7 @@ It will return a list with the dictionaries from the ```read_swell_file``` for e
 
 Note that it has only been tested with SweLL-Pilot as of 2024-04-15.
 
-## [extract_sentence_pairs.py](extract_sentence_pairs.py)
+## [`extract_sentence_pairs.py`](extract_sentence_pairs.py)
 A script to extract sentence-correction (also known as original-target) pairs from SweLL-gold XML files.
 
 Alignments are obtained by simply filtering out essays where the original and target do not have the same number of sentences.
