@@ -4,25 +4,26 @@ import xml.etree.ElementTree as ET
 import argparse
 import csv
 import conllu
+import random
 
 #######################################################################
 
 ### This is used to replace "pseudonyms" like A-stad or B-land with something more readable (but not necessarily logically coherent).
 placeholder_map = {  # baseline "pseudonymization"
-    'kurs': 'kurs',
-    'kursen': 'kursen',
-    'skola': 'Umeå universitet',
-    'region': 'Skåne',
-    'svensk-stad': 'Stockholm',
-    'institution': 'Domkyrkan',
-    'geoplats': 'Östersjön',
-    'linjen': 'Öresundståg',
-    'stad-gen': 'Stockholms',
-    'stad': 'Berlin',
-    'land': 'Tyskland',
-    'land-gen': 'Tysklands',
-    'hemland': 'Polen',
-    'plats': 'Renströmsgatan'
+    'kurs': ['kurs'],
+    'kursen': ['kursen'],
+    'skola': ['Buroskola', 'Andeskola', 'Storeskola', 'Bungahjulet'],
+    'region': ['Sydlunda', 'Undered', 'Hanskim', 'Bungalarna'],
+    'svensk-stad': ['Sydden', 'Norrebock', 'Rosaborg', 'Ögglestad'],
+    'institution': ['Volvodrömen', 'Linsbiblioteket', 'Forkecentralen', 'Bungavård'],
+    'geoplats': ['Fafjällen', 'Undberget', 'Baraön', 'Lokomitt'],
+    'linjen': ['buss'],
+    'stad-gen': ['Syddens', 'Norrebocks', 'Rosaborgs', 'Ögglestads'],
+    'stad': ['Oslo', 'Paris', 'Bagdad', 'Caracas'],
+    'land': ['Danmark', 'Mongoliet', 'Sudan', 'Peru'],
+    'land-gen': ['Danmarks', 'Mongoliets', 'Sudans', 'Perus'],
+    'hemland': ['Brasil', 'Spanien', 'Irak', 'Kina'],
+    'plats': ['Burocentrum', 'Andeplats', 'Storetorg', 'Bungafors']
     }
     
 #######################################################################
@@ -80,7 +81,7 @@ def get_sent_dict(essays: list, replace_nls: bool=False):
                 if '␤' not in word and essay_id not in word:
                     if 'A-' in word or 'B-' in word or 'C-' in word or 'D-' in word:
                         try:
-                            word = placeholder_map[word[2:]]
+                            word = random.choice(placeholder_map[word[2:]])
                         except KeyError:
                             pass
                     sent.append((word, info["correction_label"] if "correction_label" in info else "_"))
