@@ -4,7 +4,6 @@ import xml.etree.ElementTree as ET
 import argparse
 import csv
 import conllu
-import random
 
 #######################################################################
 
@@ -27,6 +26,24 @@ placeholder_map = {  # baseline "pseudonymization"
     }
     
 #######################################################################
+
+def pseudonymize(word):
+    if 'A-' in word:
+        i = 0
+    elif 'B-' in word:
+        i = 1
+    elif 'C-' in word:
+        i = 2
+    elif 'D-' in word:
+        i = 3
+    else: 
+        return word
+    try:
+        pseudo_candidates = placeholder_map[word[2:]]
+        pseudo = pseudo_candidates[i % len(pseudo_candidates)]
+    except KeyError:
+        return word
+    return pseudo
 
 def get_essays(file: str):
     '''A function that retrieves the data from a SweLL xml file and splits it into essays.
@@ -79,11 +96,7 @@ def get_sent_dict(essays: list, replace_nls: bool=False):
                     sent = []
             else: 
                 if '␤' not in word and essay_id not in word:
-                    if 'A-' in word or 'B-' in word or 'C-' in word or 'D-' in word:
-                        try:
-                            word = random.choice(placeholder_map[word[2:]])
-                        except KeyError:
-                            pass
+                    word = pseudonymize(word)
                     sent.append((word, info["correction_label"] if "correction_label" in info else "_"))
     
         essay_sents.append(sent)
