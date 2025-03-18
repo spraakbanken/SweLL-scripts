@@ -3,7 +3,7 @@
 import xml.etree.ElementTree as ET
 import argparse
 import csv
-import conllu
+import conllu.models as conllu
 
 #######################################################################
 
