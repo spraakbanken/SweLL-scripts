@@ -142,7 +142,8 @@ def tokenlist(word_label_pairs, metadata):
         a conllu.TokenList representing the sentence.
     '''
     tokens = []
-    for i, (word,label) in enumerate(word_label_pairs):
+    for i, (word,labels) in enumerate(word_label_pairs):
+        labels = labels.replace(", ", ";")
         tokens.append(conllu.Token(
             id=i + 1, 
             form=word, 
@@ -153,7 +154,7 @@ def tokenlist(word_label_pairs, metadata):
             head="_",
             deprel="_",
             deps="_",
-            misc=label))
+            misc="_" if labels == "_" else "CorrectionLabels=" + labels))
     return conllu.TokenList(tokens=tokens, metadata=metadata)
 
 if __name__ == "__main__":
